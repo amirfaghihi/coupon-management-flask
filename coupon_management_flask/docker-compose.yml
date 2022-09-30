@@ -18,10 +18,8 @@ services:
     hostname: coupon-service
     build: .
     restart: always
-    command:
-      - gunicorn
     volumes:
-      - ../:/app
+      - ./:/app
     ports:
       - "8000:8000"
 
