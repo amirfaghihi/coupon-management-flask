@@ -1,0 +1,25 @@
+version: '3'
+services:
+  db:
+    hostname: postgres
+    image: postgres:12.5
+    restart: on-failure
+    volumes:
+      - /media/postgres/data:/var/lib/postgresql/data
+    shm_size: 1g
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=mydb
+      - LOG_LEVEL=ERROR
+    ports:
+      - "5432:5432"
+  coupon-service:
+    hostname: coupon-service
+    build: .
+    restart: always
+    volumes:
+      - ./:/app
+    ports:
+      - "8000:8000"
+
